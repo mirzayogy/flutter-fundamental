@@ -1,3 +1,5 @@
+import 'package:a01_latihan/another_screen.dart';
+import 'package:a01_latihan/replacement_screen.dart';
 import 'package:a01_latihan/return_data_screen.dart';
 import 'package:a01_latihan/second_screen.dart';
 import 'package:a01_latihan/second_screen_with_data.dart';
@@ -28,6 +30,8 @@ class MyApp extends StatelessWidget {
         '/secondScreenWithData': (context) => SecondScreenWithData(
             ModalRoute.of(context)?.settings.arguments as String),
         '/returnDataScreen': (context) => const ReturnDataScreen(),
+        '/replacementScreen': (context) => const ReplacementScreen(),
+        '/anotherScreen': (context) => const AnotherScreen(),
       },
     );
   }
@@ -181,7 +185,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               OutlinedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/replacementScreen');
+                },
                 style: ElevatedButton.styleFrom(
                   side: const BorderSide(color: Colors.black),
                 ),
