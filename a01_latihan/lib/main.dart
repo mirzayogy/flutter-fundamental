@@ -1,5 +1,7 @@
+import 'package:a01_latihan/return_data_screen.dart';
 import 'package:a01_latihan/second_screen.dart';
 import 'package:a01_latihan/second_screen_with_data.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -25,6 +27,7 @@ class MyApp extends StatelessWidget {
         '/secondScreen': (context) => const SecondScreen(),
         '/secondScreenWithData': (context) => SecondScreenWithData(
             ModalRoute.of(context)?.settings.arguments as String),
+        '/returnDataScreen': (context) => const ReturnDataScreen(),
       },
     );
   }
@@ -214,10 +217,20 @@ class _LoginPageState extends State<LoginPage> {
                 text: TextSpan(
                   text: 'Belum punya akun? Ayo ',
                   style: Theme.of(context).textTheme.bodyText1,
-                  children: const [
+                  children: [
                     TextSpan(
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () async {
+                          final scaffoldMessenger =
+                              ScaffoldMessenger.of(context);
+                          final result = await Navigator.pushNamed(
+                              context, '/returnDataScreen');
+                          SnackBar snackBar =
+                              SnackBar(content: Text('$result'));
+                          scaffoldMessenger.showSnackBar(snackBar);
+                        },
                       text: 'daftar',
-                      style: TextStyle(
+                      style: const TextStyle(
                         decoration: TextDecoration.underline,
                         fontWeight: FontWeight.bold,
                         color: Colors.blue,
