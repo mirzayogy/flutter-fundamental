@@ -1,3 +1,4 @@
+import 'package:a01_latihan/second_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -17,7 +18,11 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const LoginPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const LoginPage(),
+        '/secondScreen': (context) => const SecondScreen(),
+      },
     );
   }
 }
@@ -109,13 +114,18 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const SizedBox(height: 8),
-              Text(
-                'Lupa Password?',
-                textAlign: TextAlign.right,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2!
-                    .copyWith(decoration: TextDecoration.underline),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, "/secondScreen");
+                },
+                child: Text(
+                  'Lupa Password?',
+                  textAlign: TextAlign.right,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2!
+                      .copyWith(decoration: TextDecoration.underline),
+                ),
               ),
               const SizedBox(height: 16),
               ElevatedButton(
