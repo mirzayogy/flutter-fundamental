@@ -1,4 +1,5 @@
 import 'package:a01_latihan/second_screen.dart';
+import 'package:a01_latihan/second_screen_with_data.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -22,6 +23,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const LoginPage(),
         '/secondScreen': (context) => const SecondScreen(),
+        '/secondScreenWithData': (context) => SecondScreenWithData(
+            ModalRoute.of(context)?.settings.arguments as String),
       },
     );
   }
@@ -36,6 +39,13 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool obscureText = true;
+  final emailTextField = TextEditingController();
+
+  @override
+  void dispose() {
+    emailTextField.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,9 +95,10 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 16,
               ),
-              const TextField(
+              TextField(
+                controller: emailTextField,
                 keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Email',
                   focusedBorder: OutlineInputBorder(),
                   border: OutlineInputBorder(),
@@ -132,7 +143,10 @@ class _LoginPageState extends State<LoginPage> {
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blueGrey.shade800,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/secondScreenWithData',
+                      arguments: emailTextField.text);
+                },
                 child: const Text(
                   'Masuk',
                   style: TextStyle(
