@@ -1,3 +1,4 @@
+import 'package:a02_latihan_news/detail_page.dart';
 import 'package:a02_latihan_news/model/article.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,8 @@ class MyApp extends StatelessWidget {
       initialRoute: NewsListPage.routeName,
       routes: {
         NewsListPage.routeName: (context) => const NewsListPage(),
+        ArticleDetailPage.routeName: ((context) => ArticleDetailPage(
+            article: ModalRoute.of(context)?.settings.arguments as Article))
       },
     );
   }
@@ -61,6 +64,10 @@ class NewsListPage extends StatelessWidget {
       ),
       title: Text(article.title),
       subtitle: Text(article.author),
+      onTap: () {
+        Navigator.pushNamed(context, ArticleDetailPage.routeName,
+            arguments: article);
+      },
     );
   }
 }
