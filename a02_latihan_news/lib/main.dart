@@ -2,7 +2,7 @@ import 'package:a02_latihan_news/article_webview.dart';
 import 'package:a02_latihan_news/detail_page.dart';
 import 'package:a02_latihan_news/model/article.dart';
 import 'package:flutter/material.dart';
-
+ 
 void main() {
   runApp(const MyApp());
 }
