@@ -1,3 +1,4 @@
+import 'package:a02_latihan_news/article_webview.dart';
 import 'package:a02_latihan_news/detail_page.dart';
 import 'package:a02_latihan_news/model/article.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,9 @@ class MyApp extends StatelessWidget {
       routes: {
         NewsListPage.routeName: (context) => const NewsListPage(),
         ArticleDetailPage.routeName: ((context) => ArticleDetailPage(
-            article: ModalRoute.of(context)?.settings.arguments as Article))
+            article: ModalRoute.of(context)?.settings.arguments as Article)),
+        ArticleWebView.routeName: (context) => ArticleWebView(
+            url: ModalRoute.of(context)?.settings.arguments as String)
       },
     );
   }
