@@ -1,3 +1,4 @@
+import 'package:a04_custom_component_calculator/calculator_button.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -48,17 +49,106 @@ class MyHomePage extends StatelessWidget {
             shrinkWrap: true,
             crossAxisCount: 4,
             children: <Widget>[
-              Container(
-                color: Theme.of(context).primaryColorLight,
-                child: Center(
-                  child: Text(
-                    'C',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline4!
-                        .copyWith(color: Theme.of(context).primaryColorDark),
-                  ),
-                ),
+              CalculatorButton(
+                backgroundColor: Theme.of(context).primaryColorLight,
+                foregroundColor: Theme.of(context).primaryColorDark,
+                text: 'C',
+              ),
+              CalculatorButton(
+                backgroundColor: Theme.of(context).primaryColorLight,
+                foregroundColor: Theme.of(context).primaryColorDark,
+                text: '+/-',
+              ),
+              CalculatorButton(
+                backgroundColor: Theme.of(context).primaryColorLight,
+                foregroundColor: Theme.of(context).primaryColorDark,
+                text: '%',
+              ),
+              CalculatorButton.Icon(
+                backgroundColor: Theme.of(context).primaryColorDark,
+                foregroundColor: Theme.of(context).primaryColorLight,
+                text: 'Backspace',
+                icon: Icons.backspace,
+              ),
+              CalculatorButton(
+                backgroundColor: Colors.white,
+                foregroundColor: Theme.of(context).primaryColorDark,
+                text: '7',
+              ),
+              CalculatorButton(
+                backgroundColor: Colors.white,
+                foregroundColor: Theme.of(context).primaryColorDark,
+                text: '8',
+              ),
+              CalculatorButton(
+                backgroundColor: Colors.white,
+                foregroundColor: Theme.of(context).primaryColorDark,
+                text: '9',
+              ),
+              CalculatorButton(
+                backgroundColor: Theme.of(context).primaryColorDark,
+                foregroundColor: Theme.of(context).primaryColorLight,
+                text: '/',
+              ),
+              CalculatorButton(
+                backgroundColor: Colors.white,
+                foregroundColor: Theme.of(context).primaryColorDark,
+                text: '4',
+              ),
+              CalculatorButton(
+                backgroundColor: Colors.white,
+                foregroundColor: Theme.of(context).primaryColorDark,
+                text: '5',
+              ),
+              CalculatorButton(
+                backgroundColor: Colors.white,
+                foregroundColor: Theme.of(context).primaryColorDark,
+                text: '6',
+              ),
+              CalculatorButton(
+                backgroundColor: Theme.of(context).primaryColorDark,
+                foregroundColor: Theme.of(context).primaryColorLight,
+                text: 'X',
+              ),
+              CalculatorButton(
+                backgroundColor: Colors.white,
+                foregroundColor: Theme.of(context).primaryColorDark,
+                text: '1',
+              ),
+              CalculatorButton(
+                backgroundColor: Colors.white,
+                foregroundColor: Theme.of(context).primaryColorDark,
+                text: '2',
+              ),
+              CalculatorButton(
+                backgroundColor: Colors.white,
+                foregroundColor: Theme.of(context).primaryColorDark,
+                text: '3',
+              ),
+              CalculatorButton(
+                backgroundColor: Theme.of(context).primaryColorDark,
+                foregroundColor: Theme.of(context).primaryColorLight,
+                text: '/',
+              ),
+              CalculatorButton(
+                backgroundColor: Colors.white,
+                foregroundColor: Theme.of(context).primaryColorDark,
+                text: '1',
+              ),
+              CalculatorButton(
+                backgroundColor: Colors.white,
+                foregroundColor: Theme.of(context).primaryColorDark,
+                text: '2',
+              ),
+              CalculatorButton(
+                backgroundColor: Colors.white,
+                foregroundColor: Theme.of(context).primaryColorDark,
+                text: '3',
+              ),
+              CalculatorButton(
+                backgroundColor: Theme.of(context).primaryColorDark,
+                foregroundColor: Theme.of(context).primaryColorLight,
+                text: '/',
               ),
             ],
           ),
