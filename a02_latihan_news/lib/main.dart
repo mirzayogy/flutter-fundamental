@@ -1,10 +1,9 @@
-import 'package:a02_latihan_news/article_webview.dart';
-import 'package:a02_latihan_news/detail_page.dart';
-import 'package:a02_latihan_news/model/article.dart';
-import 'package:a02_latihan_news/styles.dart';
+import 'package:a02_latihan_news/common/styles.dart';
+import 'package:a02_latihan_news/data/model/article.dart';
+import 'package:a02_latihan_news/ui/article_webview.dart';
+import 'package:a02_latihan_news/ui/detail_page.dart';
+import 'package:a02_latihan_news/ui/home_page.dart';
 import 'package:flutter/material.dart';
-
-import 'list_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,12 +22,17 @@ class MyApp extends StatelessWidget {
               onPrimary: Colors.black,
               secondary: secondaryColor,
             ),
-        // textTheme: myTextTheme,
+        scaffoldBackgroundColor: Colors.white,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        textTheme: myTextTheme,
         appBarTheme: const AppBarTheme(elevation: 0),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          selectedItemColor: secondaryColor,
+          unselectedItemColor: Colors.grey,
+        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             primary: secondaryColor,
-            onPrimary: Colors.white,
             textStyle: const TextStyle(),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
@@ -38,13 +42,15 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      initialRoute: NewsListPage.routeName,
+      initialRoute: HomePage.routeName,
       routes: {
-        NewsListPage.routeName: (context) => const NewsListPage(),
-        ArticleDetailPage.routeName: ((context) => ArticleDetailPage(
-            article: ModalRoute.of(context)?.settings.arguments as Article)),
+        HomePage.routeName: (context) => const HomePage(),
+        ArticleDetailPage.routeName: (context) => ArticleDetailPage(
+              article: ModalRoute.of(context)?.settings.arguments as Article,
+            ),
         ArticleWebView.routeName: (context) => ArticleWebView(
-            url: ModalRoute.of(context)?.settings.arguments as String)
+              url: ModalRoute.of(context)?.settings.arguments as String,
+            ),
       },
     );
   }

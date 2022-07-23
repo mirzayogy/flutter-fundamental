@@ -1,13 +1,13 @@
-import 'package:a02_latihan_news/article_webview.dart';
+import 'package:a02_latihan_news/data/model/article.dart';
 import 'package:flutter/material.dart';
 
-import 'model/article.dart';
+import 'article_webview.dart';
 
 class ArticleDetailPage extends StatelessWidget {
   static const routeName = '/article_detail';
 
   final Article article;
-  const ArticleDetailPage({required this.article});
+  const ArticleDetailPage({Key? key, required this.article}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
