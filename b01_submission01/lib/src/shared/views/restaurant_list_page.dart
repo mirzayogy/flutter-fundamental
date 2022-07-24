@@ -1,6 +1,5 @@
 import 'package:b01_submission01/src/shared/classes/restaurant.dart';
 import 'package:b01_submission01/src/shared/providers/platform_widget.dart';
-import 'package:b01_submission01/src/shared/providers/styles.dart';
 import 'package:b01_submission01/src/shared/views/image_clipper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +27,7 @@ class RestaurantListPage extends StatelessWidget {
 
   Widget _buildRestaurantItem(BuildContext context, Restaurant restaurant) {
     return Material(
-      color: primaryColor,
+      color: Colors.white,
       child: ListTile(
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -93,6 +92,7 @@ class RestaurantListPage extends StatelessWidget {
       navigationBar: const CupertinoNavigationBar(
         middle: Text("Restaurants"),
         transitionBetweenRoutes: false,
+        backgroundColor: Colors.amber,
       ),
       child: _buildList(context),
     );

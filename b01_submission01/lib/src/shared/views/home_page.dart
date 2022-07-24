@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _bottomNavIndex = 0;
-  static const String _headlineText = 'Headline';
+  static const String _restaurantText = 'Restaurant';
 
   final List<Widget> _listWidget = [
     const RestaurantListPage(),
@@ -26,8 +26,8 @@ class _HomePageState extends State<HomePage> {
 
   final List<BottomNavigationBarItem> _bottomNavBarItems = [
     BottomNavigationBarItem(
-      icon: Icon(Platform.isIOS ? CupertinoIcons.news : Icons.public),
-      label: _headlineText,
+      icon: Icon(Platform.isIOS ? CupertinoIcons.map : Icons.public),
+      label: _restaurantText,
     ),
     BottomNavigationBarItem(
       icon: Icon(Platform.isIOS ? CupertinoIcons.settings : Icons.settings),
