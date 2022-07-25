@@ -12,15 +12,32 @@ class RestaurantListPage extends StatelessWidget {
   Widget _buildList(BuildContext context) {
     return FutureBuilder<String>(
       future: DefaultAssetBundle.of(context)
-          .loadString('lib/src/shared/providers/assets/local_restaurant.json'),
+          .loadString('assets/local_restaurant.json'),
       builder: (context, snapshot) {
-        final List<Restaurant> restaurants = parseRestaurants(snapshot.data);
-        return ListView.builder(
-          itemCount: restaurants.length,
-          itemBuilder: (context, index) {
-            return _buildRestaurantItem(context, restaurants[index]);
-          },
-        );
+        if (snapshot.connectionState != ConnectionState.done) {
+          // loading widget
+          return Center(child: CircularProgressIndicator());
+        } else {
+          if (snapshot.hasData) {
+            // success widget
+            final List<Restaurant> restaurants =
+                parseRestaurants(snapshot.data);
+            return ListView.builder(
+              itemCount: restaurants.length,
+              itemBuilder: (context, index) {
+                return _buildRestaurantItem(context, restaurants[index]);
+              },
+            );
+          } else if (snapshot.hasError) {
+            // error widget
+            return Center(
+              child: Text(snapshot.error.toString()),
+            );
+          } else {
+            // loading widget
+            return Center(child: CircularProgressIndicator());
+          }
+        }
       },
     );
   }

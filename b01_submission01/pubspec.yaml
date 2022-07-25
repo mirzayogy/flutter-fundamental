@@ -21,4 +21,4 @@ flutter:
   uses-material-design: true
 
   assets:
-    - lib/src/shared/providers/assets/local_restaurant.json
+    - assets/local_restaurant.json

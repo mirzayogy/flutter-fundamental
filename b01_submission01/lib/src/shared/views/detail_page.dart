@@ -12,9 +12,7 @@ class RestaurantDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          // title: Text(restaurant.name),
-          ),
+      appBar: AppBar(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
           horizontal: 16.0,
