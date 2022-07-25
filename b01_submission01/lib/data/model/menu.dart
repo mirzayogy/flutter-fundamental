@@ -1,4 +1,4 @@
-import 'package:b01_submission01/src/shared/classes/category.dart';
+import 'package:b01_submission01/data/model/category.dart';
 
 class Menus {
   List<Category> foods;

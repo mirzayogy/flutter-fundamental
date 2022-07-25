@@ -1,6 +1,6 @@
-import 'package:b01_submission01/src/shared/classes/restaurant.dart';
-import 'package:b01_submission01/src/shared/providers/platform_widget.dart';
-import 'package:b01_submission01/src/shared/views/image_clipper.dart';
+import 'package:b01_submission01/data/model/restaurant.dart';
+import 'package:b01_submission01/widgets/image_clipper.dart';
+import 'package:b01_submission01/widgets/platform_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class RestaurantListPage extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
           // loading widget
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else {
           if (snapshot.hasData) {
             // success widget
@@ -35,7 +35,7 @@ class RestaurantListPage extends StatelessWidget {
             );
           } else {
             // loading widget
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
         }
       },

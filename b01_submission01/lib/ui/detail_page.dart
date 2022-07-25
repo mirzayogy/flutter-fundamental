@@ -1,5 +1,5 @@
-import 'package:b01_submission01/src/shared/classes/restaurant.dart';
-import 'package:b01_submission01/src/shared/views/image_clipper.dart';
+import 'package:b01_submission01/data/model/restaurant.dart';
+import 'package:b01_submission01/widgets/image_clipper.dart';
 import 'package:flutter/material.dart';
 
 class RestaurantDetailPage extends StatelessWidget {
@@ -14,9 +14,7 @@ class RestaurantDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16.0,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
         child: Column(
           children: [
             ClippedImage(

@@ -1,7 +1,7 @@
-import 'package:b01_submission01/src/shared/classes/restaurant.dart';
-import 'package:b01_submission01/src/shared/providers/styles.dart';
-import 'package:b01_submission01/src/shared/views/detail_page.dart';
-import 'package:b01_submission01/src/shared/views/home_page.dart';
+import 'package:b01_submission01/common/styles.dart';
+import 'package:b01_submission01/data/model/restaurant.dart';
+import 'package:b01_submission01/ui/detail_page.dart';
+import 'package:b01_submission01/ui/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {

@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:b01_submission01/src/shared/providers/platform_widget.dart';
-import 'package:b01_submission01/src/shared/views/restaurant_list_page.dart';
-import 'package:b01_submission01/src/shared/views/settings_page.dart';
+import 'package:b01_submission01/ui/restaurant_list_page.dart';
+import 'package:b01_submission01/ui/settings_page.dart';
+import 'package:b01_submission01/widgets/platform_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
