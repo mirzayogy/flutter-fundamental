@@ -1,13 +1,28 @@
+import 'package:b01_submission01/data/api/api_service.dart';
 import 'package:b01_submission01/data/model/restaurant.dart';
+import 'package:b01_submission01/data/model/restaurant_detail.dart';
 import 'package:b01_submission01/widgets/image_clipper.dart';
 import 'package:flutter/material.dart';
 
-class RestaurantDetailPage extends StatelessWidget {
+class RestaurantDetailPage extends StatefulWidget {
   static const routeName = '/Restaurant_detail';
 
   final Restaurant restaurant;
   const RestaurantDetailPage({Key? key, required this.restaurant})
       : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _RestaurantDetailPageState();
+}
+
+class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
+  late Future<RestaurantDetailResult> _restaurantDetail;
+
+  @override
+  void initState() {
+    super.initState();
+    // _restaurantDetail = ApiService().getDetail();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +32,9 @@ class RestaurantDetailPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
         child: Column(
           children: [
-            ClippedImage(
-              restaurant.pictureId,
-            ),
+            // ClippedImage(
+            //   _restaurantDetail.,
+            // ),
             Padding(
               padding: const EdgeInsets.all(10),
               child: Column(
@@ -29,7 +44,7 @@ class RestaurantDetailPage extends StatelessWidget {
                     height: 16,
                   ),
                   Text(
-                    restaurant.name,
+                    "restaurant.name",
                     style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -48,7 +63,7 @@ class RestaurantDetailPage extends StatelessWidget {
                       const SizedBox(
                         width: 6,
                       ),
-                      Text(restaurant.city),
+                      Text("restaurant.city"),
                     ],
                   ),
                   const SizedBox(
@@ -65,12 +80,12 @@ class RestaurantDetailPage extends StatelessWidget {
                   const SizedBox(
                     height: 8,
                   ),
-                  Text(
-                    restaurant.description,
-                    style: const TextStyle(
-                        fontSize: 16,
-                        color: Color.fromARGB(255, 105, 104, 104)),
-                  ),
+                  // Text(
+                  //   restaurant.description,
+                  //   style: const TextStyle(
+                  //       fontSize: 16,
+                  //       color: Color.fromARGB(255, 105, 104, 104)),
+                  // ),
                   const SizedBox(height: 10),
                   const SizedBox(
                     height: 16,
@@ -86,9 +101,10 @@ class RestaurantDetailPage extends StatelessWidget {
                   const SizedBox(
                     height: 32,
                   ),
-                  SizedBox(
-                      height: 220,
-                      child: _buildGrid(context, restaurant, "food")),
+                  // SizedBox(
+                  //   height: 220,
+                  //   child: _buildGrid(context, restaurant, "food")
+                  // ),
                   const SizedBox(
                     height: 32,
                   ),
@@ -103,12 +119,12 @@ class RestaurantDetailPage extends StatelessWidget {
                   const SizedBox(
                     height: 32,
                   ),
-                  SizedBox(
-                      height: 220,
-                      child: _buildGrid(context, restaurant, "drink")),
-                  const SizedBox(
-                    height: 16,
-                  ),
+                  // SizedBox(
+                  //     height: 220,
+                  //     child: _buildGrid(context, restaurant, "drink")),
+                  // const SizedBox(
+                  //   height: 16,
+                  // ),
                 ],
               ),
             ),
@@ -118,67 +134,4 @@ class RestaurantDetailPage extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget _buildGrid(
-    BuildContext context, Restaurant restaurant, String category) {
-  int categoryCount = category == "food"
-      ? restaurant.menus.foods.length
-      : restaurant.menus.drinks.length;
-
-  List<dynamic> lists =
-      category == "food" ? restaurant.menus.foods : restaurant.menus.drinks;
-
-  String urlImage = category == "food"
-      ? 'https://cdn-icons-png.flaticon.com/512/4629/4629522.png'
-      : 'https://cdn-icons-png.flaticon.com/512/820/820603.png';
-
-  return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 200,
-          childAspectRatio: 3 / 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10),
-      itemCount: categoryCount,
-      itemBuilder: (BuildContext ctx, index) {
-        return _buildItem(context, lists[index], urlImage);
-      });
-}
-
-Widget _buildItem(BuildContext context, dynamic list, String urlImage) {
-  return Material(
-    child: Container(
-      decoration: BoxDecoration(
-          color: Colors.amber, borderRadius: BorderRadius.circular(12)),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Align(
-            alignment: Alignment.centerRight,
-            child: ClippedImage(
-              urlImage,
-              width: 40,
-              height: 40,
-            ),
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          Expanded(
-            child: Text(
-              list.name,
-              textAlign: TextAlign.left,
-            ),
-          ),
-          const Text(
-            "IDR 15.000",
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              fontSize: 10,
-            ),
-          ),
-        ]),
-      ),
-    ),
-  );
 }
