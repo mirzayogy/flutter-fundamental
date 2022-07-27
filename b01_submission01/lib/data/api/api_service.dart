@@ -8,7 +8,7 @@ class ApiService {
   static const String _baseUrl = 'https://restaurant-api.dicoding.dev/';
   final _host = 'restaurant-api.dicoding.dev';
 
-  Future<RestaurantResult?> getList() async {
+  Future<RestaurantResult> getList() async {
     final response = await http.get(Uri.parse("${_baseUrl}list"));
     if (response.statusCode == 200) {
       return RestaurantResult.fromJson(json.decode(response.body));

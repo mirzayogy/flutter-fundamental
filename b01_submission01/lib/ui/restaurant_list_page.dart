@@ -1,73 +1,58 @@
-import 'package:b01_submission01/bloc/restaurant_list_bloc.dart';
-import 'package:b01_submission01/data/model/restaurant.dart';
+import 'package:b01_submission01/data/api/api_service.dart';
+import 'package:b01_submission01/data/model/restaurant_result.dart';
 import 'package:b01_submission01/ui/card_restaurant.dart';
 import 'package:b01_submission01/widgets/platform_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-class RestaurantListPage extends StatelessWidget {
+class RestaurantListPage extends StatefulWidget {
   const RestaurantListPage({Key? key}) : super(key: key);
 
   @override
+  State<StatefulWidget> createState() => _RestaurantListPageState();
+}
+
+class _RestaurantListPageState extends State<RestaurantListPage> {
+  late Future<RestaurantResult> _restaurantResult;
+
+  @override
+  void initState() {
+    super.initState();
+    _restaurantResult = ApiService().getList();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final blocProvider = BlocProvider.of<RestaurantListBloc>(context);
-
-    return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text("Restaurants"),
-        transitionBetweenRoutes: false,
-        backgroundColor: Colors.amber,
-      ),
-      child: StreamBuilder<List<Restaurant>?>(
-          stream: blocProvider.restaurantsStream,
-          builder: (context, snapshot) {
-            final results = snapshot.data;
-            if (results == null) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (results.isEmpty) {
-              return const Center(child: Text('No Results'));
-            }
-
-            return ListView.builder(
-              shrinkWrap: true,
-              itemCount: results.length,
-              itemBuilder: (context, index) {
-                var restaurant = results[index];
-                return CardRestaurant(restaurant: restaurant);
-              },
-            );
-          }),
+    return PlatformWidget(
+      androidBuilder: _buildAndroid,
+      iosBuilder: _buildIos,
     );
-
-    // return PlatformWidget(
-    //   androidBuilder: _buildAndroid,
-    //   iosBuilder: _buildIos,
-    //   blocProvider: blocProvider,
-    // );
   }
 
   Widget _buildList(BuildContext context) {
-    final blocProvider = BlocProvider.of<RestaurantListBloc>(context);
-
-    return StreamBuilder<List<Restaurant>?>(
-        stream: blocProvider.restaurantsStream,
-        builder: (context, snapshot) {
+    return FutureBuilder<RestaurantResult>(
+        future: _restaurantResult,
+        builder: (context, AsyncSnapshot<RestaurantResult> snapshot) {
           final results = snapshot.data;
-          if (results == null) {
+          var state = snapshot.connectionState;
+          if (state != ConnectionState.done) {
             return const Center(child: CircularProgressIndicator());
-          } else if (results.isEmpty) {
-            return const Center(child: Text('No Results'));
+          } else {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                shrinkWrap: true,
+                itemCount: results?.restaurants.length,
+                itemBuilder: (context, index) {
+                  var restaurant = results!.restaurants[index];
+                  return CardRestaurant(restaurant: restaurant);
+                },
+              );
+            } else if (snapshot.hasError) {
+              return Center(child: Text(snapshot.error.toString()));
+            } else {
+              return const Text('');
+            }
           }
-
-          return ListView.builder(
-            shrinkWrap: true,
-            itemCount: results.length,
-            itemBuilder: (context, index) {
-              var restaurant = results[index];
-              return CardRestaurant(restaurant: restaurant);
-            },
-          );
         });
   }
 
