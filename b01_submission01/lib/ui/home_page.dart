@@ -1,10 +1,13 @@
 import 'dart:io';
 
+import 'package:b01_submission01/data/api/api_service.dart';
+import 'package:b01_submission01/provider/restaurants_provider.dart';
 import 'package:b01_submission01/ui/restaurant_list_page.dart';
 import 'package:b01_submission01/ui/settings_page.dart';
 import 'package:b01_submission01/widgets/platform_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home_page';
@@ -20,7 +23,9 @@ class _HomePageState extends State<HomePage> {
   static const String _restaurantText = 'Restaurant';
 
   final List<Widget> _listWidget = [
-    const RestaurantListPage(),
+    ChangeNotifierProvider<RestaurantsProvider>(
+        create: (_) => RestaurantsProvider(apiService: ApiService()),
+        child: const RestaurantListPage()),
     const SettingsPage(),
   ];
 

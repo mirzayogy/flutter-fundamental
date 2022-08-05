@@ -1,9 +1,11 @@
 import 'package:b01_submission01/data/api/api_service.dart';
 import 'package:b01_submission01/data/model/restaurant_result.dart';
+import 'package:b01_submission01/provider/restaurants_provider.dart';
 import 'package:b01_submission01/ui/card_restaurant.dart';
 import 'package:b01_submission01/widgets/platform_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RestaurantListPage extends StatefulWidget {
   const RestaurantListPage({Key? key}) : super(key: key);
@@ -30,30 +32,40 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
   }
 
   Widget _buildList(BuildContext context) {
-    return FutureBuilder<RestaurantResult>(
-        future: _restaurantResult,
-        builder: (context, AsyncSnapshot<RestaurantResult> snapshot) {
-          final results = snapshot.data;
-          var state = snapshot.connectionState;
-          if (state != ConnectionState.done) {
-            return const Center(child: CircularProgressIndicator());
-          } else {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                shrinkWrap: true,
-                itemCount: results?.restaurants.length,
-                itemBuilder: (context, index) {
-                  var restaurant = results!.restaurants[index];
-                  return CardRestaurant(restaurant: restaurant);
-                },
-              );
-            } else if (snapshot.hasError) {
-              return Center(child: Text(snapshot.error.toString()));
-            } else {
-              return const Text('');
-            }
-          }
-        });
+    return Consumer<RestaurantsProvider>(
+      builder: (context, state, _) {
+        if (state.state == ResultState.loading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state.state == ResultState.hasData) {
+          return ListView.builder(
+            shrinkWrap: true,
+            itemCount: state.result.restaurants.length,
+            itemBuilder: (context, index) {
+              var restaurant = state.result.restaurants[index];
+              return CardRestaurant(restaurant: restaurant);
+            },
+          );
+        } else if (state.state == ResultState.noData) {
+          return Center(
+            child: Material(
+              child: Text(state.message),
+            ),
+          );
+        } else if (state.state == ResultState.error) {
+          return Center(
+            child: Material(
+              child: Text(state.message),
+            ),
+          );
+        } else {
+          return const Center(
+            child: Material(
+              child: Text(''),
+            ),
+          );
+        }
+      },
+    );
   }
 
   Widget _buildAndroid(BuildContext context) {
